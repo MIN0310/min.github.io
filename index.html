@@ -1,4 +1,14 @@
 <html>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded',function(){
+      document.getElementById('getSurprise').onclick=function(){
+          
+        document.getElementsByClassName('surprise')[0].textContent="https://movies.tw.campaign.yahoo.net/i/o/production/movies/June2018/V3YqQRLKa0BIkQMrO0rj-1957x2793.jpg";
+      
+      }
+    });
+  </script>
 
   <Title>迪士尼電影</Title>
 
@@ -62,7 +72,6 @@
   
   
   <h3 class="pink">你最喜歡哪部電影？</h3> 
-  <p class="pink>
     <label class="pink"><input type="radio" name="movie" checked> 阿拉丁</label><br>
     <label class="pink"><input type="radio" name="movie"> 美女與野獸</label><br>
     <label class="pink"><input type="radio" name="movie"> 魔鏡，魔鏡</label><br>                                          
@@ -73,7 +82,14 @@
       
     <input type="text" placeholder="其他">
     </form><button type="送出">送出</button>  
-                            </p>
-  
+                           
+  <p class="surprise box">
+    Surprise!
+  </p>
+  <p>
+    <button id="getSurprise">
+    Get Surprise
+    </button>
+  </p>
  
 </html>
