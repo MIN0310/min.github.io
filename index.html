@@ -115,38 +115,61 @@
   
   <head>
     <style type="text/css">
-      html, body { height: 80%; margin: 0; padding: 0; }
-      #map { height: 80%; }
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 100%; }
     </style>
   </head>
   <body>
-    <h1 class="word">About me</h1>	  
+    <h1 class="word">About me</h1>	
     <div id="map"></div>
     <script type="text/javascript">
 
-    var map;
-    var myLatLng = {lat: 25.04825 , lng: 121.44465};  
-      
-    function initMap() {      
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: myLatLng,
-        zoom: 18
-      });
-      
-      var marker = new google.maps.Marker({
-        position: myLatLng,
-        map: map,
-        title:'這是我的母校！'
-      });
-      marker.setMap(map);
-      
-    }
-      
+function initMap() {
+  var markers = [];
+  var infoWindows = [];
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center:  {lat: 25.04825 , lng: 121.44465},
+    zoom: 16
+  });
+  var geocoder = new google.maps.Geocoder();
+  console.log(geocoder);
+  
+  var info_config = [
+    '<h2>新莊高中</h2>'+
+    '<span>這是我的母校！</span>',
+    '<h2>新泰國中</h2>'+
+    '<span>這也是我的母校喔！</span>'
+  ];
 
-    </script>
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgRnU33VBlhx0huApvx4t7FxYLQwwmHKs&callback=initMap">
-    </script>
+  var marker_config = [{
+    position:  {lat: 25.04825 , lng: 121.44465},
+    map: map,
+    title:'新莊高中'
+  },{
+    position: {lat: 25.042760 , lng: 121.444175},
+    map: map,
+    title:'新泰國中'
+  }];
+  
+  info_config.forEach(function(e,i){
+    infoWindows[i] = new google.maps.InfoWindow({
+      content: e
+    });
+  });
+
+  marker_config.forEach(function(e,i){
+    markers[i] = new google.maps.Marker(e);
+    markers[i].setMap(map);
+    markers[i].addListener('click', function() {
+      infoWindows[i].open(map, markers[i]);
+    });
+  });
+}
+
+  </script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgRnU33VBlhx0huApvx4t7FxYLQwwmHKs&callback=initMap">
+  </script>
   </body>	  
   </center>
 </html>
